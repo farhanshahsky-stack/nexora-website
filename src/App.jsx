@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-const company = 'Nexora POS Solutions';
-const tagline = 'Smart Business Management Solutions';
-const whatsappNumberDisplay = '03194329754';
-const whatsappLink = 'https://wa.me/923194329754';
-const contactEmail = 'rahanshah4@gmail.com';
+const company = 'Nexora POS Solutions'
+const tagline = 'Smart Business Management Solutions'
+const whatsappNumberDisplay = '03194329754'
+const whatsappLink = 'https://wa.me/923194329754'
+const contactEmail = 'rahanshah4@gmail.com'
 const defaultLeadMessage = `Assalam o Alaikum, mujhe Nexora POS Solutions ka software demo chahiye.
 
 Business Type:
 Software Required For:
 City:
 Contact Name:
-Details:`;
-const whatsappLeadLink = `${whatsappLink}?text=${encodeURIComponent(defaultLeadMessage)}`;
+Details:`
+const whatsappLeadLink = `${whatsappLink}?text=${encodeURIComponent(defaultLeadMessage)}`
 
 const navLinks = [
   { id: 'about', label: 'About' },
-  { id: 'products', label: 'Products' },
   { id: 'services', label: 'Services' },
-  { id: 'dashboards', label: 'Dashboards' },
+  { id: 'products', label: 'Projects' },
+  { id: 'dashboards', label: 'Insights' },
   { id: 'pricing', label: 'Pricing' },
   { id: 'contact', label: 'Contact' },
-];
+]
 
 const products = [
   {
@@ -48,7 +48,7 @@ const products = [
     title: 'Transport Accounting',
     text: 'Trip income, fuel expense, and route-level profitability for transport operations.',
   },
-];
+]
 
 const services = [
   {
@@ -79,7 +79,7 @@ const services = [
     title: 'Business Automation',
     text: 'Automated summaries and role-based dashboards for management and operational teams.',
   },
-];
+]
 
 const restaurantFeatures = [
   'Fast order billing',
@@ -96,7 +96,7 @@ const restaurantFeatures = [
   'WhatsApp daily report',
   'Owner dashboard',
   'Mobile + desktop support',
-];
+]
 
 const pricingPlans = [
   {
@@ -139,7 +139,7 @@ const pricingPlans = [
       'Dedicated account manager',
     ],
   },
-];
+]
 
 const branchOffices = [
   {
@@ -150,773 +150,563 @@ const branchOffices = [
     name: 'Multan Office',
     address: 'T Chowk, Shahrukn-e-Alam Colony, Multan',
   },
-];
+]
 
 function App() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const revealItems = document.querySelectorAll('[data-reveal]');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible', 'is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -10% 0px' },
-    );
-
-    revealItems.forEach((item) => observer.observe(item));
-
-    const onResize = () => {
-      if (window.innerWidth > 768) {
-        setMobileMenuOpen(false);
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setMobileMenuOpen(false)
       }
-    };
+    }
 
-    window.addEventListener('resize', onResize);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', onResize);
-    };
-  }, []);
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleDemoSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
-    const fullName = formData.get('fullName')?.toString().trim() || 'Not provided';
-    const phoneNumber = formData.get('phoneNumber')?.toString().trim() || 'Not provided';
-    const emailAddress = formData.get('emailAddress')?.toString().trim() || 'Not provided';
-    const city = formData.get('city')?.toString().trim() || 'Not provided';
-    const businessType = formData.get('businessType')?.toString().trim() || 'Not provided';
-    const softwareRequiredFor =
-      formData.get('softwareRequiredFor')?.toString().trim() || 'Not provided';
-    const details = formData.get('message')?.toString().trim() || 'Not provided';
+    const formData = new FormData(event.currentTarget)
+    const fullName = formData.get('fullName')?.toString().trim() || 'Not provided'
+    const phoneNumber = formData.get('phoneNumber')?.toString().trim() || 'Not provided'
+    const emailAddress = formData.get('emailAddress')?.toString().trim() || 'Not provided'
+    const city = formData.get('city')?.toString().trim() || 'Not provided'
+    const businessType = formData.get('businessType')?.toString().trim() || 'Not provided'
+    const softwareRequiredFor = formData.get('softwareRequiredFor')?.toString().trim() || 'Not provided'
+    const details = formData.get('message')?.toString().trim() || 'Not provided'
 
-    const whatsappMessage = `Assalam o Alaikum, mujhe Nexora POS Solutions ka software demo chahiye.
+    const whatsappMessage = `Assalam o Alaikum, mujhe Nexora POS Solutions ka software demo chahiye.\n\nBusiness Type: ${businessType}\nSoftware Required For: ${softwareRequiredFor}\nCity: ${city}\nContact Name: ${fullName}\nPhone Number: ${phoneNumber}\nEmail Address: ${emailAddress}\nDetails: ${details}`
 
-Business Type: ${businessType}
-Software Required For: ${softwareRequiredFor}
-City: ${city}
-Contact Name: ${fullName}
-Phone Number: ${phoneNumber}
-Email Address: ${emailAddress}
-Details: ${details}`;
-
-    const mailSubject = encodeURIComponent('Nexora POS Solutions - Software Requirement');
+    const mailSubject = encodeURIComponent('Nexora POS Solutions - Software Requirement')
     const mailBody = encodeURIComponent(
       `Assalam o Alaikum,\n\nBusiness Type: ${businessType}\nSoftware Required For: ${softwareRequiredFor}\nCity: ${city}\nContact Name: ${fullName}\nPhone Number: ${phoneNumber}\nEmail Address: ${emailAddress}\nDetails: ${details}`,
-    );
-    const mailtoLink = `mailto:${contactEmail}?subject=${mailSubject}&body=${mailBody}`;
+    )
+    const mailtoLink = `mailto:${contactEmail}?subject=${mailSubject}&body=${mailBody}`
 
     const waWindow = window.open(
       `${whatsappLink}?text=${encodeURIComponent(whatsappMessage)}`,
       '_blank',
       'noopener,noreferrer',
-    );
+    )
 
     if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
-      window.location.href = mailtoLink;
+      window.location.href = mailtoLink
     }
 
-    event.currentTarget.reset();
-  };
+    event.currentTarget.reset()
+  }
 
   return (
-    <>
-      <div className="site-glow" aria-hidden="true" />
+    <div className="relative overflow-x-hidden bg-slate-50 text-slate-950">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_20%_20%,_rgba(56,189,248,0.18),_transparent_28%),radial-gradient(circle_at_80%_10%,_rgba(168,85,247,0.16),_transparent_26%)] opacity-90" />
 
-      <header className="site-header">
-        <div className="container nav-shell">
-          <a className="brand" href="#hero" aria-label="Nexora POS Solutions home">
-            <span className="brand-dot" aria-hidden="true" />
-            <span className="brand-text-wrap">
-              <span className="brand-text">{company}</span>
-              <span className="brand-tagline">{tagline}</span>
-            </span>
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/95 backdrop-blur-xl shadow-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+          <a href="#hero" className="flex items-center gap-3 text-slate-950">
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-sky-100 text-sky-700 shadow-sm">N</div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">NEXORA</p>
+              <p className="text-[0.78rem] text-slate-500">Software & dashboard solutions</p>
+            </div>
           </a>
 
-          <nav className="desktop-nav" aria-label="Main navigation">
+          <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 lg:flex">
             {navLinks.map((link) => (
-              <a key={link.id} href={`#${link.id}`}>
+              <a key={link.id} href={`#${link.id}`} className="transition hover:text-slate-900">
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <button
-            type="button"
-            className="mobile-menu-btn"
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen((prev) => !prev)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          <div className="flex items-center gap-3">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-full bg-sky-700 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-700/20 transition hover:bg-sky-800"
+            >
+              Book Demo
+            </a>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 shadow-sm lg:hidden"
+              aria-label="Open navigation menu"
+            >
+              <span className="block h-0.5 w-5 rounded-full bg-slate-700"></span>
+              <span className="mt-1 block h-0.5 w-5 rounded-full bg-slate-700"></span>
+            </button>
+          </div>
         </div>
 
         {mobileMenuOpen && (
-          <div className="container mobile-menu-card" role="menu" aria-label="Mobile menu">
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={() => setMobileMenuOpen(false)}
-                role="menuitem"
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="border-t border-slate-200/70 bg-white/95 lg:hidden">
+            <div className="mx-auto max-w-7xl space-y-2 px-4 py-4 sm:px-6 lg:px-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className="block rounded-2xl border border-slate-200/80 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         )}
       </header>
 
-      <main className="site-main">
-        <section id="hero" className="section hero">
-          <div className="container hero-content">
-            <div className="hero-copy" data-reveal>
-              <p className="eyebrow">Premium Business Software</p>
-              <h1>Nexora POS Solutions</h1>
-              <h2>POS, Restaurant, Hospital, Medical Store &amp; Business Dashboard Software</h2>
-              <p>
-                Smart software for retail counters, hospitals, pharmacies, transport operators, and
-                growing businesses that need reliable daily control.
+      <main>
+        <section id="hero" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="space-y-8">
+                <div className="feature-pill">Premium software & dashboard systems</div>
+                <div className="space-y-5">
+                  <p className="text-sm uppercase tracking-[0.28em] text-sky-700">NEXORA Solutions</p>
+                  <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
+                    Modern SaaS, ERP, CRM, POS and dashboard software for growing businesses
+                  </h1>
+                  <p className="section-copy">
+                    Nexora builds websites, powerful software, and performance dashboards that help retail,
+                    healthcare, logistics and business teams control operations faster.
+                  </p>
+                </div>
+                <div className="grid max-w-md gap-4 sm:grid-cols-2">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center rounded-full bg-sky-700 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-700/20 transition hover:bg-sky-800"
+                  >
+                    Book free demo
+                  </a>
+                  <a
+                    href={whatsappLeadLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  >
+                    Talk on WhatsApp
+                  </a>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {['POS', 'ERP', 'CRM', 'Dashboards'].map((item) => (
+                    <div key={item} className="rounded-3xl border border-slate-200/80 bg-white/90 p-4 shadow-sm">
+                      <p className="text-sm font-semibold text-slate-950">{item}</p>
+                      <p className="mt-2 text-sm text-slate-600">Scalable systems for fast decisions and daily operations.</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-sky-100/80 via-cyan-100/70 to-violet-100 blur-3xl" />
+                <div className="glass-card relative overflow-hidden p-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Live dashboard</p>
+                      <h2 className="mt-3 text-2xl font-semibold text-slate-950">Nexora Business Cloud</h2>
+                    </div>
+                    <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">
+                      Active
+                    </span>
+                  </div>
+
+                  <div className="mt-8 grid gap-4 md:grid-cols-2">
+                    <div className="rounded-3xl bg-slate-950/5 p-4">
+                      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Revenue</p>
+                      <p className="mt-3 text-2xl font-semibold text-slate-950">Rs 458,200</p>
+                    </div>
+                    <div className="rounded-3xl bg-white p-4 shadow-sm">
+                      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Orders</p>
+                      <p className="mt-3 text-2xl font-semibold text-slate-950">128</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 rounded-3xl border border-slate-200/80 bg-white p-4 shadow-sm">
+                    <div className="flex items-center justify-between text-sm text-slate-500">
+                      <span>Sales overview</span>
+                      <span>Updated now</span>
+                    </div>
+                    <div className="mt-5 grid gap-3">
+                      {[76, 92, 68, 84].map((value, index) => (
+                        <div key={index} className="grid gap-2">
+                          <div className="flex items-center justify-between text-sm text-slate-600">
+                            <span>Metric {index + 1}</span>
+                            <span>{value}%</span>
+                          </div>
+                          <div className="h-2 overflow-hidden rounded-full bg-slate-200">
+                            <div className="h-full rounded-full bg-gradient-to-r from-sky-500 to-indigo-500" style={{ width: `${value}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="bg-slate-50 py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div className="space-y-6">
+                <p className="text-sm uppercase tracking-[0.28em] text-sky-700">About Nexora</p>
+                <h2 className="section-heading">A premium software partner for POS, healthcare, transport, and business operations</h2>
+                <p className="section-copy">
+                  Nexora provides practical software for billing, accounting, pharmacy, hospital, and transport workflows with clean dashboards and faster decision-making.
+                </p>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-3xl bg-white p-6 shadow-sm">
+                  <p className="text-sm text-slate-500">Tailored software</p>
+                  <p className="mt-3 text-lg font-semibold text-slate-950">POS, ERP, CRM, and analytics in one place.</p>
+                </div>
+                <div className="rounded-3xl bg-white p-6 shadow-sm">
+                  <p className="text-sm text-slate-500">Reliable delivery</p>
+                  <p className="mt-3 text-lg font-semibold text-slate-950">Clear timelines, practical support, and fast onboarding.</p>
+                </div>
+                <div className="rounded-3xl bg-white p-6 shadow-sm">
+                  <p className="text-sm text-slate-500">Expert support</p>
+                  <p className="mt-3 text-lg font-semibold text-slate-950">WhatsApp and email support for every deployment.</p>
+                </div>
+                <div className="rounded-3xl bg-white p-6 shadow-sm">
+                  <p className="text-sm text-slate-500">Scalable teams</p>
+                  <p className="mt-3 text-lg font-semibold text-slate-950">From small shops to hospitals and transport hubs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 max-w-2xl">
+              <p className="feature-pill">Our service coverage</p>
+              <h2 className="section-heading mt-6">Software services built for growing operations</h2>
+              <p className="section-copy">
+                From POS billing and inventory alerts to hospital workflows and transport dashboards, Nexora helps your team make decisions with clarity.
               </p>
-
-              <div className="hero-buttons">
-                <a className="btn btn-main" href="#contact">
-                  Book Free Demo
-                </a>
-                <a
-                  className="btn btn-outline"
-                  href={whatsappLeadLink}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Send Requirement on WhatsApp
-                </a>
-                <a className="btn btn-outline" href={`mailto:${contactEmail}`}>
-                  Email Us
-                </a>
-              </div>
             </div>
-
-            <div className="hero-visual" data-reveal>
-              <article className="mac-window-mockup dashboard-window">
-                <div className="mac-window-topbar">
-                  <div className="mac-dots" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                  <p>Nexora Live Dashboard</p>
-                </div>
-
-                <div className="mac-window-body">
-                  <div className="mac-kpi-grid">
-                    <article className="mac-kpi mac-kpi-revenue">
-                      <p>Revenue</p>
-                      <strong>Rs 458,200</strong>
-                    </article>
-                    <article className="mac-kpi mac-kpi-orders">
-                      <p>Orders</p>
-                      <strong>128</strong>
-                    </article>
-                    <article className="mac-kpi mac-kpi-profit">
-                      <p>Profit</p>
-                      <strong>Rs 92,500</strong>
-                    </article>
-                    <article className="mac-kpi mac-kpi-stock">
-                      <p>Low Stock</p>
-                      <strong>12</strong>
-                    </article>
-                  </div>
-
-                  <article className="mac-chart-card">
-                    <header>
-                      <h3>Daily Performance Chart</h3>
-                      <span>Sales and Profit Trend</span>
-                    </header>
-                    <div className="mac-chart-canvas" aria-hidden="true">
-                      <div className="mac-grid-lines">
-                        <span />
-                        <span />
-                        <span />
-                        <span />
-                      </div>
-                      <div className="mac-bars">
-                        <span />
-                        <span />
-                        <span />
-                        <span />
-                        <span />
-                        <span />
-                      </div>
-                      <div className="mac-line">
-                        <i />
-                      </div>
-                    </div>
-                    <div className="mac-chart-labels" aria-hidden="true">
-                      <span>Mon</span>
-                      <span>Tue</span>
-                      <span>Wed</span>
-                      <span>Thu</span>
-                      <span>Fri</span>
-                      <span>Sat</span>
-                    </div>
-                    <div className="mac-chart-legend" aria-hidden="true">
-                      <span className="legend-item legend-sales">Sales</span>
-                      <span className="legend-item legend-profit">Profit</span>
-                    </div>
-                  </article>
-
-                  <div className="mac-info-grid">
-                    <article className="mac-list-card">
-                      <h4>Recent Transactions</h4>
-                      <ul>
-                        <li>INV-8201 / Rs 2,450</li>
-                        <li>INV-8202 / Rs 3,180</li>
-                        <li>INV-8203 / Rs 1,920</li>
-                      </ul>
-                    </article>
-                    <article className="mac-list-card">
-                      <h4>Medical Store Inventory Alerts</h4>
-                      <ul>
-                        <li>Paracetamol - Reorder</li>
-                        <li>Glucose Drip - Low</li>
-                        <li>Syringes - Critical</li>
-                      </ul>
-                    </article>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="section section-tight">
-          <div className="container" data-reveal>
-            <div className="section-head">
-              <p className="eyebrow">About</p>
-              <h3>{tagline}</h3>
-            </div>
-            <p className="section-body-text">
-              Nexora provides practical software for billing, accounting, pharmacy, hospital, and transport
-              workflows with clean dashboards and faster decision-making.
-            </p>
-          </div>
-        </section>
-
-        <section id="products" className="section">
-          <div className="container">
-            <div className="section-head" data-reveal>
-              <p className="eyebrow">Products</p>
-              <h3>Built for specialized business operations</h3>
-            </div>
-            <div className="product-grid">
-              {products.map((product) => (
-                <article key={product.title} className="product-card" data-reveal>
-                  <h4>{product.title}</h4>
-                  <p>{product.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="restaurant-pos" className="section restaurant-section">
-          <div className="container restaurant-grid">
-            <div className="restaurant-copy" data-reveal>
-              <p className="eyebrow">Restaurant POS</p>
-              <h3>Specially Designed Restaurant POS Software</h3>
-              <p>
-                Complete billing, kitchen, inventory, expense and profit management system for
-                restaurants, cafes, fast food points and canteens.
-              </p>
-
-              <div className="restaurant-feature-grid">
-                {restaurantFeatures.map((feature) => (
-                  <span key={feature}>{feature}</span>
-                ))}
-              </div>
-
-              <a className="btn restaurant-cta" href="#contact">
-                Book Restaurant POS Demo
-              </a>
-            </div>
-
-            <article className="restaurant-dashboard" data-reveal>
-              <header>
-                <div>
-                  <p>Restaurant Live Dashboard</p>
-                  <h4>Today Operations</h4>
-                </div>
-                <span>Kitchen + Billing</span>
-              </header>
-
-              <div className="restaurant-metrics">
-                <div>
-                  <p>Today Sales</p>
-                  <strong>Rs 58,400</strong>
-                </div>
-                <div>
-                  <p>Orders</p>
-                  <strong>176</strong>
-                </div>
-                <div>
-                  <p>Tables Active</p>
-                  <strong>14</strong>
-                </div>
-                <div>
-                  <p>Kitchen Pending</p>
-                  <strong>9</strong>
-                </div>
-                <div>
-                  <p>Expenses</p>
-                  <strong>Rs 11,200</strong>
-                </div>
-                <div>
-                  <p>Net Profit</p>
-                  <strong>Rs 47,200</strong>
-                </div>
-              </div>
-
-              <div className="restaurant-dashboard-grid">
-                <div className="restaurant-panel">
-                  <h5>Top Selling Items</h5>
-                  <ul>
-                    <li>
-                      <span>Biryani</span>
-                      <strong>42%</strong>
-                    </li>
-                    <li>
-                      <span>Burger</span>
-                      <strong>28%</strong>
-                    </li>
-                    <li>
-                      <span>Pizza</span>
-                      <strong>19%</strong>
-                    </li>
-                    <li>
-                      <span>Tea</span>
-                      <strong>11%</strong>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="restaurant-panel">
-                  <h5>Order Types</h5>
-                  <div className="order-type-bars" aria-hidden="true">
-                    <span style={{ width: '62%' }}>Dine-in</span>
-                    <span style={{ width: '48%' }}>Takeaway</span>
-                    <span style={{ width: '36%' }}>Delivery</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section id="services" className="section">
-          <div className="container">
-            <div className="section-head" data-reveal>
-              <p className="eyebrow">Services</p>
-              <h3>Complete coverage from counter to owner dashboard</h3>
-            </div>
-            <div className="service-grid">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {services.map((service) => (
-                <article key={service.title} className="service-card" data-reveal>
-                  <h4>{service.title}</h4>
-                  <p>{service.text}</p>
-                </article>
+                <div key={service.title} className="glass-panel">
+                  <h3 className="text-lg font-semibold text-slate-950">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{service.text}</p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="dashboards" className="section">
-          <div className="container">
-            <div className="section-head" data-reveal>
-              <p className="eyebrow">Dashboards</p>
-              <h3>Readable metrics, not empty placeholders</h3>
+        <section id="products" className="bg-slate-50 py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 max-w-2xl">
+              <p className="feature-pill">Portfolio</p>
+              <h2 className="section-heading mt-6">Projects and product experiences</h2>
+              <p className="section-copy">
+                Highlighting the software systems and dashboards Nexora delivers for retail, healthcare, parking, canteens, and transport businesses.
+              </p>
             </div>
-
-            <div className="dashboards-grid">
-              <article className="dashboard-card" data-reveal>
-                <header>
-                  <h4>Nexora POS Dashboard</h4>
-                  <span>Retail Operations</span>
-                </header>
-
-                <div className="dash-metric-grid">
-                  <div>
-                    <p>Revenue</p>
-                    <strong>Rs 458,200</strong>
-                  </div>
-                  <div>
-                    <p>Orders</p>
-                    <strong>128</strong>
-                  </div>
-                  <div>
-                    <p>Profit</p>
-                    <strong>Rs 92,500</strong>
-                  </div>
-                  <div>
-                    <p>Low Stock</p>
-                    <strong>12</strong>
-                  </div>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {products.map((product) => (
+                <div key={product.title} className="glass-panel">
+                  <h3 className="text-lg font-semibold text-slate-950">{product.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{product.text}</p>
                 </div>
-
-                <div className="dash-row-list">
-                  <p>INV-9021 | Rs 2,340</p>
-                  <p>INV-9022 | Rs 4,800</p>
-                  <p>INV-9023 | Rs 1,790</p>
-                </div>
-
-                <div className="progress-track" aria-hidden="true">
-                  <span style={{ width: '78%' }} />
-                </div>
-              </article>
-
-              <article className="dashboard-card" data-reveal>
-                <header>
-                  <h4>Nexora Hospital Dashboard</h4>
-                  <span>Medical Operations</span>
-                </header>
-
-                <div className="dash-metric-grid">
-                  <div>
-                    <p>Today Patients</p>
-                    <strong>86</strong>
-                  </div>
-                  <div>
-                    <p>OPD Collection</p>
-                    <strong>Rs 92,500</strong>
-                  </div>
-                  <div>
-                    <p>Pharmacy Sales</p>
-                    <strong>Rs 38,200</strong>
-                  </div>
-                  <div>
-                    <p>Inventory Alerts</p>
-                    <strong>7</strong>
-                  </div>
-                </div>
-
-                <div className="dash-row-list">
-                  <p>General OPD | 38 Patients</p>
-                  <p>Pediatrics | 14 Patients</p>
-                  <p>Cardiology | 9 Patients</p>
-                </div>
-
-                <div className="progress-track" aria-hidden="true">
-                  <span style={{ width: '69%' }} />
-                </div>
-              </article>
-
-              <article className="dashboard-card" data-reveal>
-                <header>
-                  <h4>Transport + Fleet Dashboard</h4>
-                  <span>Daily Movement Summary</span>
-                </header>
-
-                <div className="dash-metric-grid">
-                  <div>
-                    <p>Transport Trips</p>
-                    <strong>24</strong>
-                  </div>
-                  <div>
-                    <p>Fuel Expense</p>
-                    <strong>Rs 18,600</strong>
-                  </div>
-                  <div>
-                    <p>Trip Income</p>
-                    <strong>Rs 74,200</strong>
-                  </div>
-                  <div>
-                    <p>Driver Logs</p>
-                    <strong>12</strong>
-                  </div>
-                </div>
-
-                <div className="dash-row-list">
-                  <p>Trip KHI-01 | Completed</p>
-                  <p>Trip KHI-04 | Fuel updated</p>
-                  <p>Trip LHR-02 | Pending close</p>
-                </div>
-
-                <div className="progress-track" aria-hidden="true">
-                  <span style={{ width: '74%' }} />
-                </div>
-              </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="pricing" className="section">
-          <div className="container">
-            <div className="section-head" data-reveal>
-              <p className="eyebrow">Pricing</p>
-              <h3>Flexible plans for growing teams</h3>
+        <section id="dashboards" className="py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 max-w-2xl">
+              <p className="feature-pill">Insights</p>
+              <h2 className="section-heading mt-6">Readable metrics, not empty placeholders</h2>
+              <p className="section-copy">
+                Real dashboards make action easier. Here are the key live metrics offered in Nexora insights and reporting.
+              </p>
             </div>
+            <div className="grid gap-6 xl:grid-cols-3">
+              <div className="glass-panel">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold text-slate-950">Nexora POS Dashboard</h3>
+                  <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Retail</span>
+                </div>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-3xl bg-slate-100 p-4">
+                    <p className="text-sm text-slate-500">Revenue</p>
+                    <p className="mt-2 text-xl font-semibold text-slate-950">Rs 458,200</p>
+                  </div>
+                  <div className="rounded-3xl bg-slate-100 p-4">
+                    <p className="text-sm text-slate-500">Orders</p>
+                    <p className="mt-2 text-xl font-semibold text-slate-950">128</p>
+                  </div>
+                </div>
+                <div className="mt-5 rounded-3xl bg-slate-100 p-4">
+                  <p className="text-sm text-slate-500">Live updates</p>
+                </div>
+              </div>
+              <div className="glass-panel">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold text-slate-950">Nexora Hospital Dashboard</h3>
+                  <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Healthcare</span>
+                </div>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-3xl bg-slate-100 p-4">
+                    <p className="text-sm text-slate-500">Today Patients</p>
+                    <p className="mt-2 text-xl font-semibold text-slate-950">86</p>
+                  </div>
+                  <div className="rounded-3xl bg-slate-100 p-4">
+                    <p className="text-sm text-slate-500">OPD Collection</p>
+                    <p className="mt-2 text-xl font-semibold text-slate-950">Rs 92,500</p>
+                  </div>
+                </div>
+                <div className="mt-5 rounded-3xl bg-slate-100 p-4">
+                  <p className="text-sm text-slate-500">Pharmacy and inventory health at a glance.</p>
+                </div>
+              </div>
+              <div className="glass-panel">
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold text-slate-950">Transport + Fleet Dashboard</h3>
+                  <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Logistics</span>
+                </div>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-3xl bg-slate-100 p-4">
+                    <p className="text-sm text-slate-500">Trips</p>
+                    <p className="mt-2 text-xl font-semibold text-slate-950">24</p>
+                  </div>
+                  <div className="rounded-3xl bg-slate-100 p-4">
+                    <p className="text-sm text-slate-500">Fuel Expense</p>
+                    <p className="mt-2 text-xl font-semibold text-slate-950">Rs 18,600</p>
+                  </div>
+                </div>
+                <div className="mt-5 rounded-3xl bg-slate-100 p-4">
+                  <p className="text-sm text-slate-500">Trip income and fleet profit tracking.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <div className="pricing-grid">
+        <section id="pricing" className="bg-slate-50 py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 max-w-2xl">
+              <p className="feature-pill">Pricing packages</p>
+              <h2 className="section-heading mt-6">Flexible plans for growing teams</h2>
+              <p className="section-copy">
+                Choose a package that fits your business size, operational needs, and need for automation and reporting.
+              </p>
+            </div>
+            <div className="grid gap-6 xl:grid-cols-3">
               {pricingPlans.map((plan) => (
-                <article
+                <div
                   key={plan.name}
-                  className={`pricing-card ${plan.popular ? 'popular' : ''}`}
-                  data-reveal
+                  className={`glass-panel ${plan.popular ? 'border-sky-300/90 bg-sky-50/80' : ''}`}
                 >
-                  {plan.popular && <span className="popular-badge">Most Popular</span>}
-                  <h4>{plan.name}</h4>
+                  {plan.popular && (
+                    <span className="mb-4 inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">
+                      Most Popular
+                    </span>
+                  )}
+                  <h3 className="text-xl font-semibold text-slate-950">{plan.name}</h3>
                   {plan.installationFee ? (
-                    <div className="pricing-fee-grid">
-                      <div>
-                        <span>Installation Fee</span>
-                        <strong>{plan.installationFee}</strong>
+                    <div className="mt-4 grid gap-3">
+                      <div className="rounded-3xl bg-white p-4 shadow-sm">
+                        <p className="text-sm text-slate-500">Installation fee</p>
+                        <p className="mt-2 text-lg font-semibold text-slate-950">{plan.installationFee}</p>
                       </div>
-                      <div>
-                        <span>Monthly Fee</span>
-                        <strong>{plan.monthlyFee}</strong>
+                      <div className="rounded-3xl bg-white p-4 shadow-sm">
+                        <p className="text-sm text-slate-500">Monthly fee</p>
+                        <p className="mt-2 text-lg font-semibold text-slate-950">{plan.monthlyFee}</p>
                       </div>
                     </div>
                   ) : (
-                    <p className="price-row">
-                      {plan.price}
-                      <span>{plan.period}</span>
-                    </p>
+                    <p className="mt-4 text-3xl font-semibold text-slate-950">{plan.price} <span className="text-base font-medium text-slate-600">{plan.period}</span></p>
                   )}
-                  <ul>
+                  <ul className="mt-6 space-y-3 text-sm leading-7 text-slate-600">
                     {plan.points.map((point) => (
-                      <li key={point}>{point}</li>
+                      <li key={point} className="flex items-start gap-3">
+                        <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-sky-100 text-sky-700">✓</span>
+                        <span>{point}</span>
+                      </li>
                     ))}
                   </ul>
-                  <a className="btn btn-block" href="#contact">
-                    Book Free Demo
+                  <a
+                    href="#contact"
+                    className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-sky-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-800"
+                  >
+                    Start a conversation
                   </a>
-                </article>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="contact" className="section">
-          <div className="container contact-grid">
-            <div className="contact-copy" data-reveal>
-              <p className="eyebrow">Contact</p>
-              <h3>Tell us your requirement and get a guided setup plan</h3>
-              <p>
-                Tell us your business type and required software. Our team will guide you with the
-                best POS, accounting or dashboard solution.
-              </p>
-
-              <div className="contact-channel-grid">
-                <article className="contact-channel-card">
-                  <h4>WhatsApp Support</h4>
-                  <p>Send your requirement and get a quick demo consultation.</p>
-                  <a className="btn btn-block" href={whatsappLeadLink} target="_blank" rel="noreferrer">
-                    Send Requirement on WhatsApp
-                  </a>
-                  <a className="contact-direct-link" href={whatsappLink} target="_blank" rel="noreferrer">
-                    {whatsappNumberDisplay}
-                  </a>
-                </article>
-
-                <article className="contact-channel-card">
-                  <h4>Email Support</h4>
-                  <p>Share documents or requirement details directly by email.</p>
-                  <a className="btn btn-outline btn-block" href={`mailto:${contactEmail}`}>
-                    Email Us
-                  </a>
-                  <a className="contact-direct-link" href={`mailto:${contactEmail}`}>
-                    {contactEmail}
-                  </a>
-                </article>
+        <section id="contact" className="py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+              <div className="space-y-6">
+                <p className="feature-pill">Contact</p>
+                <h2 className="section-heading">Tell us your requirement and get a guided setup plan</h2>
+                <p className="section-copy">
+                  Share your business type and required software. Our team will guide you with the best POS, accounting or dashboard solution.
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-3xl bg-white p-6 shadow-sm">
+                    <h3 className="text-base font-semibold text-slate-950">WhatsApp Support</h3>
+                    <p className="mt-3 text-sm text-slate-600">Send your requirement and get quick demo consultation.</p>
+                    <a href={whatsappLeadLink} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center rounded-full bg-sky-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-800">
+                      Send Requirement
+                    </a>
+                  </div>
+                  <div className="rounded-3xl bg-white p-6 shadow-sm">
+                    <h3 className="text-base font-semibold text-slate-950">Email Support</h3>
+                    <p className="mt-3 text-sm text-slate-600">Share documents or requirements directly by email.</p>
+                    <a href={`mailto:${contactEmail}`} className="mt-5 inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-slate-50">
+                      Email Us
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <article className="requirement-card" data-reveal>
-              <h4>Requirement Form</h4>
-              <p className="form-note">
-                Tell us your business type and required software. Our team will guide you with the
-                best POS, accounting or dashboard solution.
-              </p>
-
-              <form className="contact-form" onSubmit={handleDemoSubmit}>
-                <label htmlFor="fullName">Full Name</label>
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  placeholder="Your full name"
-                  required
-                />
-
-                <label htmlFor="phoneNumber">Phone Number</label>
-                <input
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  type="tel"
-                  placeholder="03XXXXXXXXX"
-                  required
-                />
-
-                <label htmlFor="emailAddress">Email Address</label>
-                <input
-                  id="emailAddress"
-                  name="emailAddress"
-                  type="email"
-                  placeholder="you@example.com"
-                  required
-                />
-
-                <label htmlFor="city">City</label>
-                <input id="city" name="city" type="text" placeholder="Your city" required />
-
-                <label htmlFor="businessType">Business Type</label>
-                <select id="businessType" name="businessType" defaultValue="" required>
-                  <option value="" disabled>
-                    Select business type
-                  </option>
-                  <option value="Restaurant">Restaurant</option>
-                  <option value="Canteen">Canteen</option>
-                  <option value="Medical Store">Medical Store</option>
-                  <option value="Hospital">Hospital</option>
-                  <option value="Parking / Bike Stand">Parking / Bike Stand</option>
-                  <option value="Transport / Rent Car">Transport / Rent Car</option>
-                  <option value="Retail Shop">Retail Shop</option>
-                  <option value="Inventory / Warehouse">Inventory / Warehouse</option>
-                  <option value="Other Business">Other Business</option>
-                </select>
-
-                <label htmlFor="softwareRequiredFor">Software Required For</label>
-                <select id="softwareRequiredFor" name="softwareRequiredFor" defaultValue="" required>
-                  <option value="" disabled>
-                    Select required software
-                  </option>
-                  <option value="POS Billing">POS Billing</option>
-                  <option value="Accounting Dashboard">Accounting Dashboard</option>
-                  <option value="Inventory Management">Inventory Management</option>
-                  <option value="Hospital Dashboard">Hospital Dashboard</option>
-                  <option value="Medical Store System">Medical Store System</option>
-                  <option value="Transport Accounting">Transport Accounting</option>
-                  <option value="Parking Stand System">Parking Stand System</option>
-                  <option value="Custom Software">Custom Software</option>
-                </select>
-
-                <label htmlFor="message">Message / Requirements</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Describe your requirements, branches, and expected timeline."
-                />
-
-                <div className="form-action-row">
-                  <button type="submit" className="btn">
+              <div className="rounded-[2rem] border border-slate-200/80 bg-white p-8 shadow-soft">
+                <h3 className="text-xl font-semibold text-slate-950">Requirement Form</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600">
+                  Tell us your business type and required software. Our team will guide you with the best POS, accounting or dashboard solution.
+                </p>
+                <form className="mt-8 grid gap-4" onSubmit={handleDemoSubmit}>
+                  <label className="space-y-2 text-sm font-medium text-slate-900" htmlFor="fullName">
+                    <span>Full Name</span>
+                    <input id="fullName" name="fullName" type="text" placeholder="Your full name" required className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" />
+                  </label>
+                  <label className="space-y-2 text-sm font-medium text-slate-900" htmlFor="phoneNumber">
+                    <span>Phone Number</span>
+                    <input id="phoneNumber" name="phoneNumber" type="tel" placeholder="03XXXXXXXXX" required className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" />
+                  </label>
+                  <label className="space-y-2 text-sm font-medium text-slate-900" htmlFor="emailAddress">
+                    <span>Email Address</span>
+                    <input id="emailAddress" name="emailAddress" type="email" placeholder="you@example.com" required className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" />
+                  </label>
+                  <label className="space-y-2 text-sm font-medium text-slate-900" htmlFor="city">
+                    <span>City</span>
+                    <input id="city" name="city" type="text" placeholder="Your city" required className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100" />
+                  </label>
+                  <label className="space-y-2 text-sm font-medium text-slate-900" htmlFor="businessType">
+                    <span>Business Type</span>
+                    <select id="businessType" name="businessType" defaultValue="" required className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100 appearance-none">
+                      <option value="" disabled>Select business type</option>
+                      <option value="Restaurant">Restaurant</option>
+                      <option value="Canteen">Canteen</option>
+                      <option value="Medical Store">Medical Store</option>
+                      <option value="Hospital">Hospital</option>
+                      <option value="Parking / Bike Stand">Parking / Bike Stand</option>
+                      <option value="Transport / Rent Car">Transport / Rent Car</option>
+                      <option value="Retail Shop">Retail Shop</option>
+                      <option value="Inventory / Warehouse">Inventory / Warehouse</option>
+                      <option value="Other Business">Other Business</option>
+                    </select>
+                  </label>
+                  <label className="space-y-2 text-sm font-medium text-slate-900" htmlFor="softwareRequiredFor">
+                    <span>Software Required For</span>
+                    <select id="softwareRequiredFor" name="softwareRequiredFor" defaultValue="" required className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100 appearance-none">
+                      <option value="" disabled>Select required software</option>
+                      <option value="POS Billing">POS Billing</option>
+                      <option value="Accounting Dashboard">Accounting Dashboard</option>
+                      <option value="Inventory Management">Inventory Management</option>
+                      <option value="Hospital Dashboard">Hospital Dashboard</option>
+                      <option value="Medical Store System">Medical Store System</option>
+                      <option value="Transport Accounting">Transport Accounting</option>
+                      <option value="Parking Stand System">Parking Stand System</option>
+                      <option value="Custom Software">Custom Software</option>
+                    </select>
+                  </label>
+                  <label className="space-y-2 text-sm font-medium text-slate-900" htmlFor="message">
+                    <span>Message / Requirements</span>
+                    <textarea id="message" name="message" placeholder="Describe your requirements, branches, and expected timeline." className="w-full rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100 min-h-[130px] resize-vertical" />
+                  </label>
+                  <button type="submit" className="mt-1 inline-flex w-full items-center justify-center rounded-full bg-sky-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-800">
                     Send Requirement on WhatsApp
                   </button>
-                  <a className="btn btn-outline" href={`mailto:${contactEmail}`}>
-                    Email Us
-                  </a>
-                </div>
-              </form>
-            </article>
+                </form>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section id="branches" className="section section-tight">
-          <div className="container">
-            <div className="section-head" data-reveal>
-              <p className="eyebrow">Branches</p>
-              <h3>Our Branch Offices</h3>
+        <section id="branches" className="bg-slate-50 py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 max-w-2xl">
+              <p className="feature-pill">Locations</p>
+              <h2 className="section-heading mt-6">Our branch offices</h2>
+              <p className="section-copy">
+                Local offices and contact channels for Nexora support, demos and implementation guidance.
+              </p>
             </div>
-
-            <div className="branch-grid">
+            <div className="grid gap-6 lg:grid-cols-2">
               {branchOffices.map((office) => (
-                <article key={office.name} className="branch-card" data-reveal>
-                  <span className="branch-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M12 2.8c-4.06 0-7.34 3.2-7.34 7.17 0 4.97 5.98 10.52 6.23 10.76a1.63 1.63 0 0 0 2.22 0c.26-.24 6.23-5.79 6.23-10.76 0-3.97-3.28-7.17-7.34-7.17Zm0 9.95a2.79 2.79 0 1 1 0-5.57 2.79 2.79 0 0 1 0 5.57Z" />
-                    </svg>
-                  </span>
-
-                  <div className="branch-copy">
-                    <h4>{office.name}</h4>
-                    <p className="branch-address">{office.address}</p>
-                    <div className="branch-links">
-                      <a href={whatsappLink}>Phone: {whatsappNumberDisplay}</a>
-                      <a href={`mailto:${contactEmail}`}>Email: {contactEmail}</a>
+                <div key={office.name} className="glass-panel">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-sky-50 text-sky-700">
+                      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2.8c-4.06 0-7.34 3.2-7.34 7.17 0 4.97 5.98 10.52 6.23 10.76a1.63 1.63 0 0 0 2.22 0c.26-.24 6.23-5.79 6.23-10.76 0-3.97-3.28-7.17-7.34-7.17Zm0 9.95a2.79 2.79 0 1 1 0-5.57 2.79 2.79 0 0 1 0 5.57Z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-950">{office.name}</h3>
+                      <p className="mt-2 text-sm leading-7 text-slate-600">{office.address}</p>
+                      <div className="mt-4 space-y-2 text-sm text-slate-600">
+                        <a href={whatsappLink} className="inline-flex text-sky-700 hover:text-sky-900">Phone: {whatsappNumberDisplay}</a>
+                        <a href={`mailto:${contactEmail}`} className="inline-flex text-sky-700 hover:text-sky-900">Email: {contactEmail}</a>
+                      </div>
                     </div>
                   </div>
-                </article>
+                </div>
               ))}
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <div>
-            <h4>{company}</h4>
-            <p>{tagline}</p>
+      <footer className="border-t border-slate-200/70 bg-white/90 py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr]">
+            <div className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.28em] text-sky-700">NEXORA</p>
+              <h2 className="text-2xl font-semibold text-slate-950">Nexora POS Solutions</h2>
+              <p className="max-w-xl text-sm leading-7 text-slate-600">
+                Premium business software for POS, hospitals, medical stores, transport operations, and live dashboards.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-base font-semibold text-slate-950">Services</h3>
+              <ul className="mt-5 space-y-3 text-sm text-slate-600">
+                <li>POS software</li>
+                <li>ERP & CRM</li>
+                <li>Healthcare dashboards</li>
+                <li>Inventory & accounting</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-semibold text-slate-950">Contact</h3>
+              <ul className="mt-5 space-y-3 text-sm text-slate-600">
+                <li>Phone: {whatsappNumberDisplay}</li>
+                <li>Email: {contactEmail}</li>
+                <li>Address: 08 Jade Park View City Lahore</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h5>Quick Links</h5>
-            <ul>
-              <li>
-                <a href="#products">Products</a>
-              </li>
-              <li>
-                <a href="#pricing">Pricing</a>
-              </li>
-            </ul>
+          <div className="mt-10 border-t border-slate-200/70 pt-6 text-sm text-slate-500">
+            © 2026 Nexora POS Solutions. All rights reserved.
           </div>
-          <div>
-            <h5>Contact</h5>
-            <ul>
-              <li>
-                <a href={whatsappLink}>WhatsApp: {whatsappNumberDisplay}</a>
-              </li>
-              <li>
-                <a href={`mailto:${contactEmail}`}>Email: {contactEmail}</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="container footer-bottom">
-          <p>© 2026 Nexora POS Solutions</p>
-          <p>POS • Hospital • Medical Store • Transport Dashboard Software</p>
         </div>
       </footer>
-
-      <a
-        href={whatsappLink}
-        className="whatsapp-float"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Contact on WhatsApp"
-      >
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16.02 3C8.85 3 3 8.67 3 15.64c0 2.45.74 4.79 2.15 6.8L3 29l6.78-2.08a13.2 13.2 0 0 0 6.24 1.56h.01c7.17 0 13.02-5.67 13.02-12.64S23.2 3 16.02 3Zm0 23.34h-.01a10.96 10.96 0 0 1-5.58-1.52l-.4-.24-4.02 1.24 1.31-3.83-.26-.39a10.47 10.47 0 0 1-1.7-5.75c0-5.8 4.78-10.52 10.66-10.52 2.84 0 5.5 1.09 7.51 3.08a10.3 10.3 0 0 1 3.14 7.44c0 5.8-4.78 10.5-10.65 10.5Zm5.84-7.73c-.32-.16-1.9-.93-2.2-1.03-.29-.11-.5-.16-.71.16-.2.31-.8 1.03-.98 1.24-.18.2-.36.23-.68.08-.32-.16-1.35-.49-2.56-1.56-.94-.84-1.57-1.88-1.75-2.2-.18-.3-.02-.47.14-.62.14-.14.32-.36.48-.54.16-.19.22-.31.33-.52.11-.2.05-.39-.03-.55-.09-.16-.7-1.67-.96-2.29-.25-.6-.5-.52-.7-.53h-.6c-.2 0-.52.08-.79.39-.27.31-1.04 1.01-1.04 2.47 0 1.45 1.07 2.85 1.22 3.05.16.2 2.09 3.29 5.17 4.47.73.31 1.3.5 1.75.64.74.24 1.41.2 1.94.12.59-.08 1.9-.77 2.17-1.52.27-.75.27-1.39.19-1.52-.07-.11-.28-.19-.6-.35Z" />
-        </svg>
-      </a>
-
-      <div className="mobile-sticky-cta" role="region" aria-label="Quick contact actions">
-        <a href="#contact">Book Demo</a>
-        <a href={whatsappLeadLink} target="_blank" rel="noreferrer">
-          WhatsApp
-        </a>
-      </div>
-    </>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default App
